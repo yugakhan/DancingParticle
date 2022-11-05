@@ -32,7 +32,7 @@ function App() {
     document.querySelector('html').style.scrollBehavior = ''
   }, [location.pathname]); // triggered on route change
 
-  console.log("hello");
+  console.log(document.getElementById('root'));
 
   return (
     <>

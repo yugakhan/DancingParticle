@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import {
   HashRouter,
   Route,
+  Routes,
   useLocation
 } from 'react-router-dom';
 
@@ -10,13 +11,10 @@ import './css/style.css';
 
 import AOS from 'aos';
 import Home from './pages/Home';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import ResetPassword from './pages/ResetPassword';
+import Terms from './pages/Terms';
+import Policy from './pages/Policy';
 
 function App() {
-  const location = useLocation();
-
   useEffect(() => {
     AOS.init({
       once: true,
@@ -26,16 +24,20 @@ function App() {
     });
   });
 
-  useEffect(() => {
-    document.querySelector('html').style.scrollBehavior = 'auto'
-    window.scroll({ top: 0 })
-    document.querySelector('html').style.scrollBehavior = ''
-  }, [location.pathname]); // triggered on route change
-
-  console.log(document.getElementById('root'));
+  // useEffect(() => {
+  //   document.querySelector('html').style.scrollBehavior = 'auto'
+  //   window.scroll({ top: 0 })
+  //   document.querySelector('html').style.scrollBehavior = ''
+  // }); // triggered on route change
 
   return (
-    <Home />
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Home/>}/> {/*路径为/时匹配首页*/}
+        <Route path="/policy" element={<Policy/>}/>
+        <Route path="/terms" element={<Terms />} />
+      </Routes>
+    </HashRouter>
   );
 }
 
